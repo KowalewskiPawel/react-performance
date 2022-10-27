@@ -4,6 +4,8 @@
 import * as React from 'react'
 const Globe = React.lazy(() => import('../globe'));
 
+const loadGlobe = () => import('../globe');
+
 function App() {
   const [showGlobe, setShowGlobe] = React.useState(false)
 
@@ -18,21 +20,22 @@ function App() {
         padding: '2rem',
       }}
     >
-      <label style={{marginBottom: '1rem'}}>
+      <label style={{ marginBottom: '1rem' }}>
         <input
           type="checkbox"
           checked={showGlobe}
           onChange={e => setShowGlobe(e.target.checked)}
+          onMouseEnter={loadGlobe}
         />
         {' show globe'}
       </label>
-      <div style={{width: 400, height: 400}}>
-      <React.Suspense fallback={<div>Loading</div>}>
-        {showGlobe ? <Globe /> : null}
+      <div style={{ width: 400, height: 400 }}>
+        <React.Suspense fallback={<div>Loading</div>}>
+          {showGlobe ? <Globe /> : null}
         </React.Suspense>
       </div>
     </div>
   )
-    }
+}
 
 export default App
